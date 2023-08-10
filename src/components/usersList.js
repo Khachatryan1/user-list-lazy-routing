@@ -1,17 +1,21 @@
 import {memo} from "react"
-import PropTypes from 'prop-types'
 import {useNavigate} from "react-router"
+import {useDispatch, useSelector} from "react-redux"
 
 import {Button} from "./button"
+import {deleteUser} from "../store/userList/userList.action"
 
 
-
-export const UsersList = memo(({userList, setUserList}) => {
+export const UsersList = memo(() => {
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
-    const handleDelete = (id) => {
-        const newList = userList.filter((user) => user.id !== id)
-        setUserList(newList)
+    const { list } = useSelector( store => ({
+        list: store.userListReducer.list
+    }) )
+
+    const handleDelete = (userId) => {
+        dispatch(deleteUser(userId))
     }
 
     return (
@@ -27,7 +31,7 @@ export const UsersList = memo(({userList, setUserList}) => {
                 </tr>
                 </thead>
                 <tbody>
-                {userList?.map((user) => (
+                {list?.map((user) => (
                     <tr key={user.id}>
                         <td className='tdStyle'>{user.Name}</td>
                         <td className='tdStyle'>{user.Surname}</td>
@@ -46,7 +50,3 @@ export const UsersList = memo(({userList, setUserList}) => {
     )
 })
 
-UsersList.propTypes = {
-    userList: PropTypes.array,
-    setUserList: PropTypes.func,
-}

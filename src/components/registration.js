@@ -1,6 +1,8 @@
 import {useState, useEffect} from "react"
 import {useForm} from "react-hook-form"
-import PropTypes from 'prop-types'
+import {useDispatch, useSelector} from "react-redux"
+
+import {addUser} from "../store/userList/userList.action"
 
 import {LoadingSpinner} from "./loading/loading"
 import {UsersList} from "./usersList"
@@ -8,8 +10,14 @@ import {Input} from "./input"
 
 import image from '../assets/images/face.jpg'
 
-export const Registration = ({userList, setUserList}) => {
+export const Registration = () => {
     const [loading, setLoading] = useState(true)
+
+    const dispatch = useDispatch()
+
+    const { list } = useSelector( store => ({
+        list: store.userListReducer.list
+    }) )
 
     const {
         register,
@@ -19,7 +27,7 @@ export const Registration = ({userList, setUserList}) => {
     } = useForm()
 
     const onSubmit = (data) => {
-        setUserList([...userList, {...data, img: image, id: userList?.length + 1}])
+        dispatch(addUser([...list, {...data, img: image, id: list?.length + 1}]))
         reset()
     }
 
@@ -28,7 +36,7 @@ export const Registration = ({userList, setUserList}) => {
             setLoading(false)
         }, 2000)
 
-    }, [userList])
+    }, [list])
 
 
     return (
@@ -76,15 +84,10 @@ export const Registration = ({userList, setUserList}) => {
 
                         <input type="submit" value='send'/>
                     </form>
-
-                    <UsersList setUserList={setUserList} userList={userList}/>
+                    <UsersList/>
                 </div>
             }
         </div>
     )
 }
 
-Registration.propTypes = {
-    userList: PropTypes.array,
-    setUserList: PropTypes.func,
-}

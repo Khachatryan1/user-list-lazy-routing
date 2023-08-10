@@ -5,6 +5,7 @@ import {Input} from "../components/input"
 
 const email = 'admin@gmail.com'
 const password = 'password'
+
 const Login = () => {
     const navigate = useNavigate()
 

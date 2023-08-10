@@ -1,17 +1,10 @@
 import {Registration} from "../components/registration"
-import PropTypes from 'prop-types'
 
-const Home = ({userList, setUserList}) => {
+export const Home = () => {
     return (
         <div>
-            <Registration userList={userList} setUserList={setUserList}/>
+            <Registration/>
         </div>
     )
 }
 
-Home.propTypes = {
-    userList: PropTypes.array,
-    setUserList: PropTypes.func,
-}
-
-export default Home

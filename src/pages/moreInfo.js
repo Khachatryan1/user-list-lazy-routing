@@ -1,13 +1,17 @@
-import {Button} from "../components/button";
-import {useNavigate, useParams} from "react-router";
-import PropTypes from 'prop-types'
+import {Button} from "../components/button"
+import {useNavigate, useParams} from "react-router"
+import {useSelector} from "react-redux"
 
 
-const MoreInfo = ({userList}) => {
+export const MoreInfo = () => {
     const params = useParams()
     const navigate = useNavigate()
 
-    const current = userList?.find((user) => user?.id === + params?.id)
+    const { list } = useSelector( store => ({
+        list: store.userListReducer.list
+    }) )
+
+    const current = list?.find((user) => user?.id === + params?.id)
 
     return (
         <div className={'moreInfo'}>
@@ -40,9 +44,3 @@ const MoreInfo = ({userList}) => {
         </div>
     )
 }
-
-MoreInfo.propTypes = {
-    userList: PropTypes.array,
-}
-
-export default MoreInfo
