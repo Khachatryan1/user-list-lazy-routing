@@ -1,21 +1,16 @@
-import {memo} from "react"
+import {memo, useContext} from "react"
 import {useNavigate} from "react-router"
-import {useDispatch, useSelector} from "react-redux"
 
 import {Button} from "./button"
-import {deleteUser} from "../store/userList/userList.action"
+import {CustomContext} from "../util"
 
 
 export const UsersList = memo(() => {
+    const {list, setList} = useContext(CustomContext)
     const navigate = useNavigate()
-    const dispatch = useDispatch()
-
-    const { list } = useSelector( store => ({
-        list: store.userListReducer.list
-    }) )
 
     const handleDelete = (userId) => {
-        dispatch(deleteUser(userId))
+        setList(list.filter((user) => user.id !== userId))
     }
 
     return (
@@ -32,7 +27,7 @@ export const UsersList = memo(() => {
                 </thead>
                 <tbody>
                 {list?.map((user) => (
-                    <tr key={user.id}>
+                    <tr key={`${user.id} ${user.Name} ${user.email}`}>
                         <td className='tdStyle'>{user.Name}</td>
                         <td className='tdStyle'>{user.Surname}</td>
                         <td className='tdStyle'>{user.Age}</td>

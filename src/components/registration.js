@@ -1,10 +1,9 @@
-import {useState, useEffect} from "react"
+import {useState, useEffect, useContext} from "react"
 import {useForm} from "react-hook-form"
-import {useDispatch, useSelector} from "react-redux"
 
-import {addUser} from "../store/userList/userList.action"
 
 import {LoadingSpinner} from "./loading/loading"
+import {CustomContext} from "../util"
 import {UsersList} from "./usersList"
 import {Input} from "./input"
 
@@ -12,12 +11,8 @@ import image from '../assets/images/face.jpg'
 
 export const Registration = () => {
     const [loading, setLoading] = useState(true)
+    const {list, setList} = useContext(CustomContext)
 
-    const dispatch = useDispatch()
-
-    const { list } = useSelector( store => ({
-        list: store.userListReducer.list
-    }) )
 
     const {
         register,
@@ -27,7 +22,7 @@ export const Registration = () => {
     } = useForm()
 
     const onSubmit = (data) => {
-        dispatch(addUser([...list, {...data, img: image, id: list?.length + 1}]))
+        setList([...list, {...data, img: image, id: list?.length + 1}])
         reset()
     }
 

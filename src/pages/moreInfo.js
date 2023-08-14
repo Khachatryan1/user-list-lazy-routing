@@ -1,15 +1,14 @@
 import {Button} from "../components/button"
 import {useNavigate, useParams} from "react-router"
-import {useSelector} from "react-redux"
+import {CustomContext} from "../util"
+import {useContext} from "react";
 
 
 export const MoreInfo = () => {
     const params = useParams()
     const navigate = useNavigate()
+    const {list} = useContext(CustomContext)
 
-    const { list } = useSelector( store => ({
-        list: store.userListReducer.list
-    }) )
 
     const current = list?.find((user) => user?.id === + params?.id)
 
