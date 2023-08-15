@@ -1,18 +1,15 @@
-import {useState, useEffect, useContext} from "react"
+import {useEffect, useContext} from "react"
 import {useForm} from "react-hook-form"
-
 
 import {LoadingSpinner} from "./loading/loading"
 import {CustomContext} from "../util"
 import {UsersList} from "./usersList"
 import {Input} from "./input"
 
-import image from '../assets/images/face.jpg'
+import image from "../assets/images/face.jpg"
 
 export const Registration = () => {
-    const [loading, setLoading] = useState(true)
-    const {list, setList} = useContext(CustomContext)
-
+    const {list, setList, loading, setLoading} = useContext(CustomContext)
 
     const {
         register,
