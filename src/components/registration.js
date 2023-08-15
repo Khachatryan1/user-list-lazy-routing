@@ -2,7 +2,7 @@ import {useEffect, useContext} from "react"
 import {useForm} from "react-hook-form"
 
 import {LoadingSpinner} from "./loading/loading"
-import {CustomContext} from "../util"
+import {CustomContext} from "../utils/context"
 import {UsersList} from "./usersList"
 import {Input} from "./input"
 

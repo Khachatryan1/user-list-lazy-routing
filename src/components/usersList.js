@@ -2,7 +2,7 @@ import {memo, useContext} from "react"
 import {useNavigate} from "react-router"
 
 import {Button} from "./button"
-import {CustomContext} from "../util"
+import {CustomContext} from "../utils/context"
 
 
 export const UsersList = memo(() => {

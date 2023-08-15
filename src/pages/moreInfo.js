@@ -1,6 +1,6 @@
 import {Button} from "../components/button"
 import {useNavigate, useParams} from "react-router"
-import {CustomContext} from "../util"
+import {CustomContext} from "../utils/context"
 import {useContext} from "react";
 
 
